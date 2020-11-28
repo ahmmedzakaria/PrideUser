@@ -12,6 +12,11 @@ public class HomeController {
 	public String home() { 
 		return "index.html";
 	}
+
 	
+	@GetMapping("/signup")
+	public String signup() { 
+		return "signup.html";
+	}
 }
 

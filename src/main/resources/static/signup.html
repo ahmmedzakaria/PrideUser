@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html ng-app="mayApp2">
+
+<head>
+	<title></title>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+<!-- 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://www.google.com">
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
+	<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+	<!-- <style type="text/css">
+		#wrap{
+			background-image: -ms-linear-gradient(top, #FFFFFF 0%, #D3D8E8 100%);
+			/* Mozilla Firefox */ 
+			background-image: -moz-linear-gradient(top, #FFFFFF 0%, #D3D8E8 100%);
+			/* Opera */ 
+			background-image: -o-linear-gradient(top, #FFFFFF 0%, #D3D8E8 100%);
+			/* Webkit (Safari/Chrome 10) */ 
+			background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFFFF), color-stop(1, #D3D8E8));
+			/* Webkit (Chrome 11+) */ 
+			background-image: -webkit-linear-gradient(top, #FFFFFF 0%, #D3D8E8 100%);
+			/* W3C Markup, IE10 Release Preview */ 
+			background-image: linear-gradient(to bottom, #FFFFFF 0%, #D3D8E8 100%);
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+		}
+		legend{
+			color:#141823;
+			font-size:25px;
+			font-weight:bold;
+		}
+		.signup-btn {
+			background: #79bc64;
+			background-image: -webkit-linear-gradient(top, #79bc64, #578843);
+			background-image: -moz-linear-gradient(top, #79bc64, #578843);
+			background-image: -ms-linear-gradient(top, #79bc64, #578843);
+			background-image: -o-linear-gradient(top, #79bc64, #578843);
+			background-image: linear-gradient(to bottom, #79bc64, #578843);
+			-webkit-border-radius: 4;
+			-moz-border-radius: 4;
+			border-radius: 4px;
+			text-shadow: 0px 1px 0px #898a88;
+			-webkit-box-shadow: 0px 0px 0px #a4e388;
+			-moz-box-shadow: 0px 0px 0px #a4e388;
+			box-shadow: 0px 0px 0px #a4e388;
+			font-family: Arial;
+			color: #ffffff;
+			font-size: 20px;
+			padding: 10px 20px 10px 20px;
+			border: solid #3b6e22  1px;
+			text-decoration: none;
+		}
+
+		.signup-btn:hover {
+			background: #79bc64;
+			background-image: -webkit-linear-gradient(top, #79bc64, #5e7056);
+			background-image: -moz-linear-gradient(top, #79bc64, #5e7056);
+			background-image: -ms-linear-gradient(top, #79bc64, #5e7056);
+			background-image: -o-linear-gradient(top, #79bc64, #5e7056);
+			background-image: linear-gradient(to bottom, #79bc64, #5e7056);
+			text-decoration: none;
+		}
+		.navbar-default .navbar-brand{
+			color:#fff;
+			font-size:30px;
+			font-weight:bold;
+		}
+		.form .form-control { margin-bottom: 10px; }
+		@media (min-width:768px) {
+			#home{
+				margin-top:50px;
+			}
+			#home .slogan{
+				color: #0e385f;
+				line-height: 29px;
+				font-weight:bold;
+			}
+		}
+	</style> -->
+</head>
+
+<script>
+
+var mayApp2 = angular
+.module("mayApp2", [])
+.controller("signupController", function ($scope,$http) {
+    var user2={
+        username:'',
+        password:'',
+        role:'ROLE_USER'
+    };
+    $scope.user2=user2;
+    
+    $scope.saveUser = function () {
+        console.log("save user called...");
+        console.log(angular.toJson($scope.user2));
+        $http({
+            method: "POST",
+            url: 'register',
+            data: angular.toJson($scope.user2),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(success, error);
+    };
+    
+
+    
+    function success(response) {
+        $scope.message = "Success! " + response.data;
+        console.log("success=====");
+        console.log(response);
+    }
+
+    function error(response) {
+       
+        $scope.message = "Failed! " + response.data;
+        console.log("error=====");
+        console.log(response);
+      
+    }
+});
+
+
+
+</script>
+<body>
+
+	<!------ Include the above in your HEAD tag ---------->
+
+	<div ng-controller="signupController as ctr" class="container" id="wrap">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<form action="r" method="post" accept-charset="utf-8" class="form" role="form">   <legend>Sign Up</legend>
+
+					<div class="row">
+						
+					</div>{{user2.username}}  {{user2.password}} 
+							<input type="text" name="username"  ng-model="user2.username" value="" class="form-control input-lg" placeholder="Username"  />
+							<input type="password" name="password" ng-model="user2.password" value="" class="form-control input-lg" placeholder="Password"  />
+							<input type="password" name="confirm_password" value="" class="form-control input-lg" placeholder="Confirm Password"  />  
+							<input type="submit" class="fadeIn fourth" ng-click="ctr.saveUser();" value="submit">            
+							<button class="btn btn-lg btn-primary btn-block signup-btn"  ng-click="ctr.saveUser();"  type="submit">
+										Create my account</button>
+				</form>          
+			</div>
+			</div>            
+		</div>
+
+		</body>
+	</html>
