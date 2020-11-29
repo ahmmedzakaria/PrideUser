@@ -18,5 +18,11 @@ public class HomeController {
 	public String signup() { 
 		return "signup.html";
 	}
+	
+
+	@GetMapping("/user")
+	public String getUser() { 
+		return "user.html";
+	}
 }
 

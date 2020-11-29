@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ResourceController {
 	
-	@RequestMapping("/user")
-	public ResponseEntity<Map<String, Object>>  getUser()
-	{
-		Map<String,Object> data = new HashMap<>();	
-		data.put("role","user");
-		System.out.println("user=========================");
-		return new ResponseEntity<Map<String,Object>>(data, HttpStatus.OK);
-	}
-	
+//	@RequestMapping("/user")
+//	public ResponseEntity<Map<String, Object>>  getUser()
+//	{
+//		Map<String,Object> data = new HashMap<>();	
+//		data.put("role","user");
+//		System.out.println("user=========================");
+//		return new ResponseEntity<Map<String,Object>>(data, HttpStatus.OK);
+//	}
+//	
 	@RequestMapping("/admin")
 	public String getAdmin()
 	{

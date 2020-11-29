@@ -1,15 +1,21 @@
-<!DOCTYPE html>
-<html ng-app="mayApp2">
 
+<!DOCTYPE html>
+<html ng-app="myModule">
 <head>
 	<title></title>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
-<!-- 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://www.google.com">
-	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
-	<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
-	<!-- <style type="text/css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-route/1.8.2/angular-route.min.js "></script>
+	 <script type="text/javascript" src="js/Script.js" ></script>
+
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+<!-- 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+		<!------ Include the above in your HEAD tag ---------->
+
+	  
+	<style type="text/css">
 		#wrap{
 			background-image: -ms-linear-gradient(top, #FFFFFF 0%, #D3D8E8 100%);
 			/* Mozilla Firefox */ 
@@ -77,71 +83,26 @@
 				font-weight:bold;
 			}
 		}
-	</style> -->
+	</style>
 </head>
 
-<script>
 
-var mayApp2 = angular
-.module("mayApp2", [])
-.controller("signupController", function ($scope,$http) {
-    var user2={
-        username:'',
-        password:'',
-        role:'ROLE_USER'
-    };
-    $scope.user2=user2;
-    
-    $scope.saveUser = function () {
-        console.log("save user called...");
-        console.log(angular.toJson($scope.user2));
-        $http({
-            method: "POST",
-            url: 'register',
-            data: angular.toJson($scope.user2),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(success, error);
-    };
-    
-
-    
-    function success(response) {
-        $scope.message = "Success! " + response.data;
-        console.log("success=====");
-        console.log(response);
-    }
-
-    function error(response) {
-       
-        $scope.message = "Failed! " + response.data;
-        console.log("error=====");
-        console.log(response);
-      
-    }
-});
-
-
-
-</script>
 <body>
 
 	<!------ Include the above in your HEAD tag ---------->
 
-	<div ng-controller="signupController as ctr" class="container" id="wrap">
+	<div ng-controller="myController as ctr" class="container" id="wrap">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
 				<form action="r" method="post" accept-charset="utf-8" class="form" role="form">   <legend>Sign Up</legend>
 
 					<div class="row">
 						
-					</div>{{user2.username}}  {{user2.password}} 
-							<input type="text" name="username"  ng-model="user2.username" value="" class="form-control input-lg" placeholder="Username"  />
-							<input type="password" name="password" ng-model="user2.password" value="" class="form-control input-lg" placeholder="Password"  />
-							<input type="password" name="confirm_password" value="" class="form-control input-lg" placeholder="Confirm Password"  />  
-							<input type="submit" class="fadeIn fourth" ng-click="ctr.saveUser();" value="submit">            
-							<button class="btn btn-lg btn-primary btn-block signup-btn"  ng-click="ctr.saveUser();"  type="submit">
+					</div>{{user.username}}  {{user.password}} 
+							<input type="text" name="username"  ng-model="user.username" value="" class="form-control input-lg" placeholder="Username"  />
+							<input type="password" name="password" ng-model="user.password" value="" class="form-control input-lg" placeholder="Password"  />
+	         
+							<button class="btn btn-lg btn-primary btn-block signup-btn"  ng-click="saveUser();"  type="submit">
 										Create my account</button>
 				</form>          
 			</div>

@@ -3,6 +3,7 @@ package com.zakaria.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -48,10 +49,13 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
+		http.cors().disable();
 		http.csrf().disable()
 		.authorizeRequests().antMatchers("/admin").hasRole("ADMIN")
 		.antMatchers("/user").hasAnyRole("USER")
-		.antMatchers("/authenticate", "/register","/signup","/","/js/*").permitAll().anyRequest().authenticated()
+		.antMatchers("/authenticate", "/register","/signup","/","/css/**", "/js/**")
+		.permitAll().antMatchers(HttpMethod.OPTIONS,"/**")
+		.permitAll().anyRequest().authenticated()
 		.and().exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).
 		and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).
 		and().addFilterBefore(customJwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
